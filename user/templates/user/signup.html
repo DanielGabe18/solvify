@@ -26,7 +26,7 @@
             border-radius: 15px;
             padding: 1rem;
             height: fit-content;
-            width: 25em;
+            width: fit-content;
         }
 
         .form h2 {
@@ -39,11 +39,20 @@
 
         .form input {
             width: 390px;
-            height: 30px;
+            height: 35px;
             margin-top: 0.5em;
             margin-bottom: 1.5em;
             border-radius: 8px;
             border: 1px solid black;
+        }
+
+        .form input:focus {
+            outline-style: none;
+            box-shadow: none;
+        }
+
+        .form #username, #fname, #lname, #email {
+            width: 420px;
         }
 
         .form label  {
@@ -51,7 +60,7 @@
         }
 
         .form button {
-            width: 400px;
+            width: 430px;
             height: 50px;
             background-color: #808080;
             color: #EFEFEF;
@@ -93,6 +102,48 @@
             .form button {
                 width: 295px;
             }
+
+            .form #username, #fname, #lname, #email {
+                width: 295px;
+            }
+        }
+
+        form img {
+            height: 20px;
+            width: 20px;
+        }
+
+        form #visible {
+            display: none;
+        }
+
+        .password-container {
+            border: 1px solid black;
+            padding: 0;
+            border-radius: 7.5px;
+            display: flex;
+            align-items: center;
+            background-color: white;
+        }
+
+        .password-container img {
+            margin-right: 7.5px;
+        }
+
+        #pass1, #pass2 {
+            border: none;
+            margin: 0;
+            width: 390px;
+        }
+
+        #visible1, #visible2 {
+            display: none;   
+        }
+
+        .form ul {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            padding-left: 20px;
         }
     </style>
 </head>
@@ -123,27 +174,39 @@
                 {% csrf_token %}
                 <label for="username">Username</label>
                 <br>
-                <input type="text" class="form-control" id="username" name="username" placeholder="Create A Username (use only letters and numbers)" Required>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Create a username" Required>
                 <br>
                 <label for="fname">First Name</label>
                 <br>
-                <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter Your First Name" Required>
+                <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter your first name" Required>
                 <br>
                 <label for="lname">Last Name</label>
                 <br>
-                <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter Your Last Name" Required>
+                <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter your last name" Required>
                 <br>
                 <label for="email">Email</label>
                 <br>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email Address" Required>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address" Required>
                 <br>
                 <label for="pass1">Password</label>
                 <br>
-                <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Create Your Password" Required>
-                <br>
+                <div class="password-container">
+                    <input type="password" class="form-control password-input" id="pass1" name="pass1" placeholder="Create your password" Required>
+                    <img src="/static/img/visible.png" alt="" id="visible1">
+                    <img src="/static/img/hidden.png" alt="" id="invisible1">
+                </div>
+                <ul>
+                    <li><p style="font-size: 12px;">Should be alphanumeric</p></li>
+                    <li><p style="font-size: 12px;">Contain atleast one upper and lowercase letter</p></li>
+                    <li><p style="font-size: 12px;">Contain a special character</p></li>
+                </ul>
                 <label for="pass2">Confirm Password</label>
                 <br>
-                <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Confirm Your Password" Required>
+                <div class="password-container">
+                    <input type="password" class="form-control password-input" id="pass2" name="pass2" placeholder="Confirm Your Password" Required>
+                    <img src="/static/img/visible.png" alt="" id="visible2">
+                    <img src="/static/img/hidden.png" alt="" id="invisible2">
+                </div>
                 <br>
                 <button type="submit" class="btn btn-primary">Sign Up</button>
             </form>
@@ -151,4 +214,38 @@
         </div>
     </div>
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const visible1 = document.getElementById('visible1');
+        const invisible1 = document.getElementById('invisible1');
+        const pass1 = document.getElementById('pass1');
+        const visible2 = document.getElementById('visible2');
+        const invisible2 = document.getElementById('invisible2');
+        const pass2 = document.getElementById('pass2');
+    
+        invisible1.addEventListener('click', function() {
+            invisible1.style.display = 'none';
+            visible1.style.display = 'block';
+            pass1.type = 'text';
+        });
+    
+        visible1.addEventListener('click', function() {
+            visible1.style.display = 'none';
+            invisible1.style.display = 'block';
+            pass1.type = 'password';
+        });
+
+        invisible2.addEventListener('click', function() {
+            invisible2.style.display = 'none';
+            visible2.style.display = 'block';
+            pass2.type = 'text';
+        });
+    
+        visible2.addEventListener('click', function() {
+            visible2.style.display = 'none';
+            invisible2.style.display = 'block';
+            pass2.type = 'password';
+        })
+    });    
+</script>
 </html>

@@ -130,7 +130,7 @@
             margin-right: 7.5px;
         }
 
-        #pass1, #pass2 {
+        #pass1, #pass2, #username {
             border: none;
             margin: 0;
             width: 390px;
@@ -141,7 +141,7 @@
         }
 
         .form ul {
-            margin-top: 15px;
+            margin-top: 10px;
             margin-bottom: 15px;
             padding-left: 20px;
         }
@@ -173,11 +173,13 @@
             <form method="post" action="{% url 'signup' %}">
                 {% csrf_token %}
                 <label for="username">Username</label>
-                <ul>
+                <br>
+                <div class="password-container">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Create a username" Required>
+                </div>
+                <ul id="ul1">
                     <li><p style="font-size: 12px;">Should be less than 10 characters</p></li>
                 </ul>
-                <input type="text" class="form-control" id="username" name="username" placeholder="Create a username" Required>
-                <br>
                 <label for="fname">First Name</label>
                 <br>
                 <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter your first name" Required>
